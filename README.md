@@ -16,6 +16,20 @@ ZeeLM is a full-stack AI workspace that joins a polished, blue-illumination inte
 
 ## At a glance
 
+## Interface showcase
+
+### AI Assistant — Local Intelligence
+
+![ZeeLM AI Assistant](docs/screenshots/ai-assistant.png)
+
+A local-first workspace for product thinking, research, and technical exploration.
+
+### Engineering Lab — Design to Delivery
+
+![ZeeLM Engineering Lab](docs/screenshots/engineering-lab.png)
+
+A dedicated workspace for architecture, API design, debugging, and engineering decisions.
+
 | Area | Implementation |
 |---|---|
 | Interface | Next.js App Router, React, TypeScript, CSS, responsive sidebar |
