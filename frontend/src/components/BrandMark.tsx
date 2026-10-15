@@ -1,0 +1,1 @@
+export function BrandMark({size=34}:{size?:number}) { return <div aria-label="ZeeLM" style={{width:size,height:size,display:"grid",placeItems:"center",borderRadius:10,background:"#164571",color:"#e5f3ff",fontSize:size*.58}}>◇</div>; }

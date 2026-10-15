@@ -1,0 +1,26 @@
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Model checkpoints
+training/models/*.pt
+training/models/*.pth
+training/models/*.ckpt
+
+# Frontend
+node_modules/
+.next/
+out/
+
+# Editor and OS
+.vscode/
+.DS_Store
+Thumbs.db
