@@ -6,7 +6,7 @@
 
 **Next.js · React · TypeScript · FastAPI · Python · Ollama · Qwen3 1.7B**
 
-[Get started](#quick-start) · [Architecture](#architecture) · [Features](#features) · [Documentation](#documentation) · [Troubleshooting](#troubleshooting)
+[Features](#features) · [Architecture](#architecture) · [Quick start](#quick-start) · [Documentation](#documentation)
 
 </div>
 
@@ -63,11 +63,11 @@ The V4.1 training experiment is separate from this request path. Details: [docs/
 
 ### 1 — Clone the source
 
-After creating your repository, replace `YOUR_GITHUB_USERNAME` below with your actual account name:
+Clone the public ZeeLM repository:
 
 ```powershell
-git clone https://github.com/YOUR_GITHUB_USERNAME/zeelm.git
-cd zeelm
+git clone https://github.com/yakutswe/ZeeLM.git
+cd ZeeLM
 ```
 
 For an existing local checkout, skip cloning and open the project root instead.
@@ -88,11 +88,11 @@ From the project root, using the existing virtual environment if one is present:
 ```powershell
 # Only if you have not created a virtual environment already:
 py -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r .\backend\requirements-zeelm.txt
+.\.venv\Scripts\python.exe -m pip install fastapi uvicorn ollama
 .\.venv\Scripts\python.exe -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8000 --reload
 ```
 
-If your checkout uses `backend/requirements.txt` instead, install that file; use the dependency file actually present. Verify the endpoints below.
+These are the core dependencies used by the checked-in FastAPI service. For a reproducible deployment, pin verified versions in a backend requirements file.
 
 ### 4 — Start Next.js
 
@@ -140,7 +140,6 @@ zeelm/
 │   ├── app/
 │   │   ├── __init__.py
 │   │   └── main.py                  # FastAPI + Ollama chat integration
-│   └── requirements-zeelm.txt      # Or requirements.txt in your checkout
 ├── frontend/
 │   ├── public/images/blue-illumination.webp
 │   ├── src/
@@ -157,7 +156,8 @@ zeelm/
 │   ├── ARCHITECTURE.md
 │   ├── BUILD_GUIDE.md
 │   ├── COMMAND_REFERENCE.md
-│   └── GITHUB_PUBLISH.md
+│   ├── GITHUB_PUBLISH.md
+│   └── TROUBLESHOOTING.md
 └── README.md
 ```
 
@@ -181,52 +181,17 @@ Run the project's lint/test commands if configured. A previously shared terminal
 | [Build guide](docs/BUILD_GUIDE.md) | Detailed VS Code setup, file map, implementation stages, and validation |
 | [Command reference](docs/COMMAND_REFERENCE.md) | PowerShell, Python, npm, Git, checks and troubleshooting commands |
 | [GitHub publishing](docs/GITHUB_PUBLISH.md) | Review, ignore rules, staging, remote, push and repository verification |
+| [Troubleshooting](docs/TROUBLESHOOTING.md) | Local runtime checks, ports, browser state, and connection issues |
 
-## Troubleshooting
+## Security and scope
 
-<details>
-<summary><strong>Next.js started on port 3001 instead of 3000</strong></summary>
+ZeeLM is a **local development prototype**, not an audited security product or a hosted, multi-user service. Conversations are stored in the browser; local inference uses Ollama with Qwen3. Do not commit secrets, private conversation exports, training data, or model weights. Experimental ZeeLM V4.1 training is separate from the model currently serving chat.
 
-Another process is listening on 3000. Stop the unused Next.js server, or use the exact URL displayed by the active terminal. Check listening processes with `Get-NetTCPConnection -LocalPort 3000 -State Listen` in PowerShell.
+For environment-specific issues, see the [troubleshooting guide](docs/TROUBLESHOOTING.md).
 
-</details>
+## Future directions
 
-<details>
-<summary><strong>The sidebar CSS change appears in Chrome but disappears after refresh</strong></summary>
-
-DevTools Console style changes affect the live DOM only. Persist changes in the actual component or stylesheet, save them, and verify the running port and imported CSS. ZeeLM's history spacing was resolved by defining independent section containers; see the latest `Sidebar.tsx` and CSS in this repository.
-
-</details>
-
-<details>
-<summary><strong>Cannot reach FastAPI / Ollama</strong></summary>
-
-Verify that Ollama is running and contains `qwen3:1.7b`; then check the FastAPI health endpoint and the Next.js proxy's configured backend URL. A passing `/health` check does not by itself prove the model is ready.
-
-</details>
-
-<details>
-<summary><strong>Where did my conversations go?</strong></summary>
-
-Conversation state is stored in the browser's localStorage for this site and browser profile. Inspect Recent, Archived, and Recently Deleted; a deleted item is recoverable only until it expires. Clearing site data is not reversible through the app.
-
-</details>
-
-## Security and limitations
-
-- Local-first is not the same as audited privacy or encryption. Review your machine, browser, model and network settings.
-- The included reference implementation does not establish authentication, permissions, multi-user isolation, encrypted chat backups, or a cloud deployment.
-- Only run locally trusted code and dependencies. Review `.gitignore` before pushing.
-- Do **not** commit `.env` secrets, API keys, chat exports, private training datasets, checkpoint weights or personal backups.
-- The experimental model training outputs are not evidence that ZeeLM serves that trained model; the live application serves Qwen3 via Ollama.
-
-## Roadmap
-
-- [ ] Reproducible automated component and end-to-end tests
-- [ ] Export/import conversations and resilient storage
-- [ ] Model selection and health visibility
-- [ ] Streaming generation, cancellation, and user feedback
-- [ ] Authentication and deployment architecture, if a remote edition is developed
+Potential next iterations include automated UI/API tests, conversation export and backup, improved model diagnostics, streaming responses, and richer evaluation workflows. These are **planned enhancements**, not claims about the current release.
 
 ## References
 
@@ -234,4 +199,4 @@ Conversation state is stored in the browser's localStorage for this site and bro
 
 ---
 
-**Maintained as a portfolio and engineering-learning project.** The GitHub repository URL will become available in the address bar once this source has been pushed to GitHub. No public deployment is claimed.
+**ZeeLM** is an open-source portfolio and engineering-learning project. [View the repository on GitHub](https://github.com/yakutswe/ZeeLM). No public deployment is claimed.
