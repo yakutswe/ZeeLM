@@ -2,7 +2,7 @@
 
 # ZeeLM
 
-### Local-first AI workspace for product thinking, engineering, and research
+### Local AI workspace for product thinking, engineering, and research
 
 **Next.js · React · TypeScript · FastAPI · Python · Ollama · Qwen3 1.7B**
 
